@@ -1,0 +1,8 @@
+version: "3.9"
+services:
+  receiver:
+    build: .
+    ports:
+      - "8080:80808"
+  redis:
+    image: "redis:alpine"
