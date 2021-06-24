@@ -1,8 +1,16 @@
 version: "3.9"
 services:
   receiver:
-    build: .
+    build: 
+      context: ./receiver
+      dockerfile: Dockerfile
+    entrypoint: flask run
     ports:
-      - "8080:80808"
-  redis:
-    image: "redis:alpine"
+      - "8080:8080"
+  pinger:
+    build: 
+      context: ./pinger
+      dockerfile: Dockerfile
+    entrypoint: flask run
+    ports: 
+      - "8070:8080"

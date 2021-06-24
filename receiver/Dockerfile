@@ -1,10 +1,9 @@
 FROM python:3.7-alpine
-WORKDIR /code
+WORKDIR /receiver
 ENV FLASK_APP=receiver.py
 ENV FLASK_RUN_HOST=0.0.0.0
 RUN apk add --no-cache gcc musl-dev linux-headers
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
-EXPOSE 5000
+EXPOSE 8080
 COPY . .
-CMD ["flask", "run"]

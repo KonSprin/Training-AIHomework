@@ -8,8 +8,11 @@ api = Api(app)
 @api.route('/api/v1/ping/<string:url>')
 class Ping(Resource):
     def put(self, url):
-        response = requests.get(url)
-        return response.text
+        try: 
+            response = requests.get(url)
+            return response.text
+        except:
+            return 0
         
 
 if __name__ == '__main__':
