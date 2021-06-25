@@ -1,16 +1,27 @@
 version: "3.9"
 services:
-  receiver:
-    build: 
-      context: ./receiver
-      dockerfile: Dockerfile
-    entrypoint: flask run
-    ports:
-      - "8080:8080"
   pinger:
     build: 
       context: ./pinger
-      dockerfile: Dockerfile
-    entrypoint: flask run
+      dockerfile: Dockerfile_pinger
+    entrypoint: python pinger.py
     ports: 
-      - "8070:8080"
+      - "8080:8080"
+    networks:
+      static-network:
+        ipv4_address: 172.20.128.1
+  receiver:
+    build: 
+      context: ./receiver
+      dockerfile: Dockerfile_receiver
+    entrypoint: python receiver.py
+    ports:
+      - "8080:8080"
+    networks:
+      static-network:
+        ipv4_address: 172.20.128.2
+networks:
+  static-network:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
